@@ -26,11 +26,17 @@ A Java Swing-based desktop application for managing railway ticket bookings. Thi
 3. Import the `database.sql` file (if provided) or create tables for `users`, `trains`, and `bookings`.
 
 ## 📸 Screenshots
-### Login Screen
-<img height="350" alt="Login Screen" src="https://github.com/user-attachments/assets/f8db253d-ac05-47f0-a008-57df135b1492" />
+<p align="center">
+  <b>Login Screen</b><br>
+  <img src="https://github.com/user-attachments/assets/f8db253d-ac05-47f0-a008-57df135b1492" width="800">
+</p>
 
-### User Dashboard
-<img height="350" alt="User Dashboard" src="https://github.com/user-attachments/assets/e5af9ec5-14fd-4464-adb2-8fefa5ded3aa" />
+<br>
+
+<p align="center">
+  <b>User Dashboard</b><br>
+  <img src="https://github.com/user-attachments/assets/e5af9ec5-14fd-4464-adb2-8fefa5ded3aa" width="800">
+</p>
 
 
 
