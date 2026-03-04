@@ -1,0 +1,29 @@
+# Railway Reservation System
+
+A Java Swing-based desktop application for managing railway ticket bookings. This project features a role-based access system for Admin and Passengers, integrated with a MySQL database.
+
+## 🚀 Features
+
+### **Admin Module**
+* **Train Management**: Add, View, Update, and Delete train schedules.
+* **Dashboard**: Visual overview of system operations.
+
+### **Passenger Module**
+* **Registration/Login**: Secure account creation and role-based access.
+* **Booking System**: Search for trains and book tickets.
+* **PNR Status**: Check booking details using a unique PNR.
+* **Profile Management**: View and update personal information.
+
+## 🛠️ Tech Stack
+* **Language**: Java 17+
+* **GUI**: Java Swing (AWT)
+* **Database**: MySQL
+* **Architecture**: DAO Pattern (Decoupled logic and UI)
+
+## 📋 Prerequisites
+1. Install **XAMPP** or **MySQL Server**.
+2. Create a database named `railway_db`.
+3. Import the `database.sql` file (if provided) or create tables for `users`, `trains`, and `bookings`.
+
+## 📸 Screenshots
+*(You can add images here from your `assets` folder later)*
