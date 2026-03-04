@@ -1,0 +1,17 @@
+# Ignore compiled Java files
+*.class
+bin/
+
+# Ignore Eclipse-specific files
+.metadata/
+.settings/
+.project
+.classpath
+
+# Ignore OS-generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Ignore database log files (if any)
+*.log
