@@ -67,7 +67,7 @@ public class LoginFrame extends JFrame {
 		glassPanel.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 2));
 		contentPane.add(glassPanel);
 
-		JLabel lblTitle = new JLabel(" LOGIN");
+		JLabel lblTitle = new JLabel(" LOGIN PAGE");
 		lblTitle.setForeground(new Color(25, 25, 112));
 		lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 26));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,7 +94,7 @@ public class LoginFrame extends JFrame {
 		txtPassword.setBounds(50, 210, 250, 35);
 		glassPanel.add(txtPassword);
 
-		JButton btnLogin = new JButton("LOGIN TO PORTAL");
+		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.setBackground(new Color(70, 130, 180)); 
 		btnLogin.setForeground(Color.WHITE);
 		btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));

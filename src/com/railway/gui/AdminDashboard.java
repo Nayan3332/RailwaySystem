@@ -96,11 +96,11 @@ public class AdminDashboard extends JFrame {
 		});
 
 		addButton("MANAGE USERS", 610, 530, 250, 50, new Color(105, 105, 105), e -> {
-			new ManageUsersFrame().setVisible(true);
+			new ManageUsersFrame(adminName).setVisible(true);
 			dispose(); 
 		});
 
-		JButton btnLogout = new JButton("SECURE LOGOUT");
+		JButton btnLogout = new JButton("LOGOUT");
 		btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnLogout.setBackground(new Color(25, 25, 112));
 		btnLogout.setForeground(Color.WHITE);

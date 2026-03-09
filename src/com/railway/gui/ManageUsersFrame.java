@@ -12,17 +12,26 @@ public class ManageUsersFrame extends JFrame {
 	private DefaultTableModel model;
 	private User_DAO userDAO;
 
-	public ManageUsersFrame() {
+	public ManageUsersFrame(String adminName) {
 		this.userDAO = new User_DAO();
 
 		setTitle("Admin - System User Management");
-		setBounds(100, 100, 750, 500); 
+		setBounds(100, 100, 750, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel contentPane = new JPanel(null);
 		contentPane.setBackground(new Color(240, 248, 255));
 		setContentPane(contentPane);
+
+		JButton btnBack = new JButton("DASHBOARD");
+		btnBack.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		btnBack.setBounds(20, 20, 130, 30);
+		btnBack.addActionListener(e -> {
+			new AdminDashboard(adminName).setVisible(true); 
+			dispose(); 
+		});
+		contentPane.add(btnBack);
 
 		JLabel lblTitle = new JLabel("SYSTEM USER ACCOUNTS");
 		lblTitle.setForeground(new Color(25, 25, 112));
@@ -35,7 +44,7 @@ public class ManageUsersFrame extends JFrame {
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
-			} 
+			}
 		};
 		JTable table = new JTable(model);
 		table.setRowHeight(30);
@@ -60,7 +69,6 @@ public class ManageUsersFrame extends JFrame {
 			if (row != -1) {
 				int id = (int) model.getValueAt(row, 0);
 
-				//check to prevent accidental deletion of the primary admin account
 				if (id == 1) {
 					JOptionPane.showMessageDialog(this, "Security Alert: Cannot delete System Administrator!");
 					return;
@@ -71,7 +79,7 @@ public class ManageUsersFrame extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
-					if (userDAO.deleteUser(id)) { 
+					if (userDAO.deleteUser(id)) {
 						JOptionPane.showMessageDialog(this, "User successfully removed.");
 						loadUsers();
 					}
@@ -85,7 +93,7 @@ public class ManageUsersFrame extends JFrame {
 
 	private void loadUsers() {
 		List<User> userList = userDAO.getAllUsers();
-		model.setRowCount(0); 
+		model.setRowCount(0);
 		for (User u : userList) {
 			model.addRow(new Object[] { u.getUserId(), u.getUsername(), u.getFullname(), u.getRole() });
 		}
