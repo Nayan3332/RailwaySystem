@@ -10,6 +10,7 @@ public class Train {
 
 	public Train() {
 	}
+
 //field
 	public Train(int trainNo, String trainName, String source, String destination, double price, int seats) {
 		this.trainNo = trainNo;
@@ -19,6 +20,7 @@ public class Train {
 		this.price = price;
 		this.seats = seats;
 	}
+
 // Getters and Setters
 	public int getTrainNo() {
 		return trainNo;

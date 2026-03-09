@@ -1,29 +1,32 @@
 package com.railway.model;
+
 import java.sql.Date;
 
-
 public class Booking {
-	private int pnr;
+	private long pnr; 
 	private int userId;
 	private int trainNo;
 	private String passengerName;
 	private Date bookingDate;
+	private int seatNo; 
 
 	public Booking() {
 	}
-//field
-	public Booking(int userId, int trainNo, String passengerName, Date bookingDate) {
+
+	public Booking(int userId, int trainNo, String passengerName, Date bookingDate, int seatNo) {
 		this.userId = userId;
 		this.trainNo = trainNo;
 		this.passengerName = passengerName;
 		this.bookingDate = bookingDate;
+		this.seatNo = seatNo;
 	}
-//getter and setter
-	public int getPnr() {
+
+	// Getters and Setters
+	public long getPnr() {
 		return pnr;
 	}
 
-	public void setPnr(int pnr) {
+	public void setPnr(long pnr) {
 		this.pnr = pnr;
 	}
 
@@ -57,5 +60,13 @@ public class Booking {
 
 	public void setBookingDate(Date bookingDate) {
 		this.bookingDate = bookingDate;
+	}
+
+	public int getSeatNo() {
+		return seatNo;
+	}
+
+	public void setSeatNo(int seatNo) {
+		this.seatNo = seatNo;
 	}
 }

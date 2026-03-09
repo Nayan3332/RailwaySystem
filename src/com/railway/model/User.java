@@ -1,6 +1,5 @@
 package com.railway.model;
 
-
 public class User {
 	private int userId;
 	private String username;
@@ -8,11 +7,9 @@ public class User {
 	private String fullname;
 	private String role;
 
-	
 	public User() {
 	}
 
-	
 	public User(String username, String password, String fullname, String role) {
 		this.username = username;
 		this.password = password;

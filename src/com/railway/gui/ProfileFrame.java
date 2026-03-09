@@ -1,73 +1,97 @@
 package com.railway.gui;
 
+import java.awt.*;
+import javax.swing.*;
 import com.railway.dao.User_DAO;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import com.railway.model.User;
 
 public class ProfileFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private String currentUserName; 
+	public ProfileFrame(String userName) {
+		setTitle("Railway System - User Profile");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 500);
+		setLocationRelativeTo(null);
+		setResizable(false);
 
-    public ProfileFrame(String userName) {
-        this.currentUserName = userName;
-        
-        setTitle("My Profile - " + userName);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        setLocationRelativeTo(null);
-        
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(245, 245, 245));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+		JPanel contentPane = new JPanel(null);
+		contentPane.setBackground(new Color(240, 248, 255));
+		setContentPane(contentPane);
 
-        JLabel lblTitle = new JLabel("USER PROFILE");
-        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 22));
-        lblTitle.setBounds(125, 30, 200, 40);
-        contentPane.add(lblTitle);
+		// Fetch user details
+		User user = new User_DAO().getUserByUsername(userName);
 
-        JLabel lblUser = new JLabel("Logged in as: " + userName);
-        lblUser.setHorizontalAlignment(SwingConstants.CENTER);
-        lblUser.setBounds(125, 80, 200, 25);
-        contentPane.add(lblUser);
+		JLabel lblTitle = new JLabel("MY ACCOUNT PROFILE");
+		lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		lblTitle.setForeground(new Color(25, 25, 112));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(75, 25, 300, 30);
+		contentPane.add(lblTitle);
 
-        JButton btnChangePass = new JButton("UPDATE PASSWORD");
-        btnChangePass.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        btnChangePass.setBounds(125, 130, 200, 45);
-        btnChangePass.setBackground(new Color(153, 102, 153));
-        btnChangePass.setForeground(Color.WHITE);
-        
-        btnChangePass.addActionListener(e -> {
-            String newPass = JOptionPane.showInputDialog("Enter New Password:");
-            if (newPass != null && !newPass.isEmpty()) {
-                if (new User_DAO().updatePassword(currentUserName, newPass)) {
-                    JOptionPane.showMessageDialog(null, "Password Updated Successfully!");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Update Failed. Check Database connection.");
-                }
-            }
-        });
-        contentPane.add(btnChangePass);
+		// Info Panel 
+		JPanel infoPanel = new JPanel(null);
+		infoPanel.setBackground(Color.WHITE);
+		infoPanel.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 1));
+		infoPanel.setBounds(50, 75, 350, 100);
+		contentPane.add(infoPanel);
 
-        JButton btnBack = new JButton("BACK");
-        btnBack.setBounds(175, 200, 100, 30);
-        btnBack.addActionListener(e -> {
-            // Checks if user is admin or regular user to go back to the right dashboard
-            // For now, defaulting to UserDashboard
-            new UserDashboard(currentUserName).setVisible(true);
-            dispose();
-        });
-        contentPane.add(btnBack);
-    }
+		JLabel lblName = new JLabel("Full Name: " + (user != null ? user.getFullname() : "N/A"));
+		lblName.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblName.setBounds(20, 20, 310, 25);
+		infoPanel.add(lblName);
+
+		JLabel lblUser = new JLabel("Username: " + userName);
+		lblUser.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		lblUser.setForeground(Color.DARK_GRAY);
+		lblUser.setBounds(20, 50, 310, 25);
+		infoPanel.add(lblUser);
+
+		JLabel lblSecurity = new JLabel("Security Settings");
+		lblSecurity.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		lblSecurity.setBounds(50, 200, 200, 25);
+		contentPane.add(lblSecurity);
+
+		JLabel lblPass = new JLabel("Enter New Password:");
+		lblPass.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		lblPass.setBounds(50, 230, 200, 20);
+		contentPane.add(lblPass);
+
+		JPasswordField txtPass = new JPasswordField();
+		txtPass.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		txtPass.setBounds(50, 255, 350, 40);
+		contentPane.add(txtPass);
+
+		JButton btnUpdate = new JButton("UPDATE PASSWORD");
+		// Theme Sync: Steel Blue for primary actions
+		btnUpdate.setBackground(new Color(70, 130, 180));
+		btnUpdate.setForeground(Color.WHITE);
+		btnUpdate.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		btnUpdate.setBounds(100, 320, 250, 45);
+		btnUpdate.setFocusPainted(false);
+
+		btnUpdate.addActionListener(e -> {
+			String newPass = new String(txtPass.getPassword());
+			if (!newPass.trim().isEmpty()) {
+				if (new User_DAO().updatePassword(user.getUserId(), newPass)) {
+					JOptionPane.showMessageDialog(this, "Password updated successfully!");
+					txtPass.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Please enter a valid password.");
+			}
+		});
+		contentPane.add(btnUpdate);
+
+		JButton btnBack = new JButton("BACK TO DASHBOARD");
+		btnBack.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		btnBack.setBackground(new Color(105, 105, 105)); 
+		btnBack.setForeground(Color.WHITE);
+		btnBack.setBounds(125, 390, 200, 35);
+		btnBack.addActionListener(e -> {
+			new UserDashboard(userName).setVisible(true);
+			dispose();
+		});
+		contentPane.add(btnBack);
+	}
 }
